@@ -7,7 +7,8 @@ def test_home():
     response = client.get("/")
 
     assert response.status_code == 200
-    assert response.json["status"] == "success"
+    assert b"Build. Deploy." in response.data
+    assert b"My CI/CD Pipeline" in response.data
 
 
 def test_health():
@@ -16,3 +17,4 @@ def test_health():
 
     assert response.status_code == 200
     assert response.json["status"] == "healthy"
+    assert response.json["application"] == "DevOps CI/CD Dashboard"
